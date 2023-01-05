@@ -33,8 +33,9 @@ export class OpenAIService {
                 markdown: process.env.CHATGPT_MARKDOWN || false,
                 minimize: process.env.CHATGPT_MINIMIZE || false,
                 executablePath: executablePath(),
-                isGoogleLogin: process.env.CHATGPT_GOOGLELOGIN || true,
-                captchaToken: process.env.CAPTCHA_TOKEN
+                isGoogleLogin: false,
+                captchaToken: process.env.CAPTCHA_TOKEN,
+                proxyServer: '196.196.246.244:12345'
 
             })
             this.logger.log('Initing session for ChatGPT Browser')
@@ -50,7 +51,6 @@ export class OpenAIService {
 
     }
     async sendMessage(message: string, conversationId: string | undefined, parentMessageId: string | undefined): Promise<string> {
-
         this.logger.log(`Send Message ${message}`)
         let response: string | undefined;
         if (!conversationId) {
